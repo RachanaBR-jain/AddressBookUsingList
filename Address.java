@@ -1,3 +1,4 @@
+//Composition
 public class Address {
 	String area;
 	String city;
@@ -7,7 +8,7 @@ public class Address {
 	public Address(String area,String city, String state, int zip) {
 		this.area=area;
 		this.city = city;
-		this.state = state;
+		this.state = state; 
 		this.zip = zip;
 	}
 	
@@ -48,7 +49,7 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address --> \n area= "+area+"\n city=" + city + ", \n state=" + state + ", \n zip=" + zip;
+		return " area= "+area+"\n city=" + city + ", \n state=" + state + ", \n zip=" + zip;
 	}
 }
 

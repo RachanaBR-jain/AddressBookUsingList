@@ -79,7 +79,7 @@ public class AddressBook implements iContactDetails{
 
 	public static String deleteDetails() {
 
-		System.out.println("Enter First Name of Details to be deleted: ");
+		System.out.println("Enter First Name of Details to be deteted: ");
 		String name2 = sc.next();
 
 		if (name2.equals(list.get(0).getFirstName())) {
@@ -93,51 +93,65 @@ public class AddressBook implements iContactDetails{
 	public String  mulipleAddressBook()
 	{
 		Scanner sc = new Scanner(System.in);
+		System.out.println("----- new AddressBook------");
 		System.out.println("Enter name of new address book");
 		String name = sc.nextLine() ;
 		AddressBook addressBook  = new AddressBook();
 		map.put(name, addressBook);
-		System.out.println("new address book added "+ name); 
+		System.out.println("new address book added -->"+name); 
 		return name;
 	}
 
 	public static void main(String[] args){
 
 		AddressBook person=new AddressBook();
-		System.out.println("Welcome To Address Book Problem");
+		System.out.println("Welcome To Address Book Problem!!!");
 		Scanner sc=new Scanner(System.in); 
-		String name1=person.mulipleAddressBook();
+		System.out.println("Enter no of addressBook you need...?");
+		int noOfAddressBook=sc.nextInt();
+		for(int i=1;i<= noOfAddressBook;i++)
+		{ 
+			String res1=person.mulipleAddressBook();
+			Map<String,AddressBook> name=new HashMap<>();
+			name.put(res1,person);
 
-		System.out.println("Number no of list of person to be added in AddressBook "+ name1);
-		int numOfPerson=sc.nextInt();
+			System.out.println("Number of list of person to be added in AddressBook ");
+			int numOfPerson=sc.nextInt();
+			for (int k = 1; k <= numOfPerson; k++) { 
 
-		for (int i = 1; i <= numOfPerson; i++) { 
+				System.out.println("Enter of details of person: "+k);
+				person.addDetails();
+			}
+			System.out.println("********************");
+			System.out.println("Do to need to edit the exiting user details Y / N? ");
+			char edit=sc.next().toUpperCase().charAt(0);
 
-			System.out.println("Enter of details of person: "+i);
-			person.addDetails();
+			if (edit=='Y') {
+				System.out.println(editDetails()); 
+			}else{
+				System.out.println("Done");
+			}
+			System.out.println("***********************");
+			System.out.print("Do you want to Delete That Contact ? (y/n)");
+			char delete=sc.next().toUpperCase().charAt(0); 
+			if (delete=='Y'){ 
+				System.out.println(deleteDetails());  
+			}else{
+				System.out.println("Done");
+			}
+			System.out.println("***********************");
+
+
+
+			for(int j=0; j<map.size(); j++)
+			{  
+				
+				System.out.println("list of person in AddressBook "+res1);
+
+				System.out.println("_____________________________________________");
+				System.out.println(list.get(j));
+			}
 		}
-
-		System.out.println("Do to need to edit the exiting user details Y / N? ");
-		char edit=sc.next().toUpperCase().charAt(0);
-
-		if (edit=='Y') {
-			System.out.println(editDetails()); 
-		}else{
-			System.out.println("Done");
-		}
-
-		System.out.print("Do you want to Delete That Contact ? (y/n)");
-		char delete=sc.next().toUpperCase().charAt(0); 
-		if (delete=='Y'){
-			System.out.println(deleteDetails());
-		}else{
-			System.out.println("Done");
-		}
-
-
-		for(int j=0; j<list.size(); j++)
-			System.out.println(list.get(j));
-
 		sc.close();
 
 	}

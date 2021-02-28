@@ -1,13 +1,13 @@
 
 public class ContactDetails {
- 
+
 	public String firstName;
 	public String lastName; 
 	public Address address;
 	public int phoneNumber;
 	public String email;
 
-	
+
 
 	public ContactDetails(String firstName, String lastName, Address address,int phoneNumber ,String email) {
 		super();
@@ -21,7 +21,7 @@ public class ContactDetails {
 	public void setAddress(Address address) {
 		this.address = address;
 	} 
-	 
+
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -62,7 +62,7 @@ public class ContactDetails {
 
 	@Override
 	public String toString() {
-		return "ContactDetails /n firstName=" + firstName +"\n lastName=" + lastName +"\n address=" + address + "\n phoneNumber="+ phoneNumber+"\n email="+ email;
+		return " Person details \n FirstName=" + firstName +"\n lastName=" + lastName +"\n address=" + address + "\n phoneNumber="+ phoneNumber+"\n email="+ email;
 	}
 
 
