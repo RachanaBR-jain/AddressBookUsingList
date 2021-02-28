@@ -12,7 +12,7 @@ public class AddressBook implements iContactDetails{
 
 	static ArrayList<ContactDetails> list = new ArrayList<ContactDetails>();
 	static Scanner sc = new Scanner(System.in);
-	
+
 	@Override 
 	public  void addDetails()
 	{
@@ -68,15 +68,24 @@ public class AddressBook implements iContactDetails{
 			list.get(0).setEmail(sc.next());
 
 			System.out.println(list.get(0));
-			return "Edited";
+			return "Edited"; 
 		}else{
 			return "Name Not Available in List";
 		} 
 	}
 
+	public static String deleteDetails() {
 
+		System.out.println("Enter First Name of Details to be deteted: ");
+		String name2 = sc.next();
 
-
+		if (name2.equals(list.get(0).getFirstName())) {
+			list.remove(0);
+			return "Deleted"; 
+		}else{
+			return "Name Not Available in List";
+		} 
+	}
 
 	public static void main(String[] args){
 
@@ -93,19 +102,28 @@ public class AddressBook implements iContactDetails{
 			person.addDetails();
 		}
 
-			System.out.println("Do to need to edit the exiting user details Y / N? ");
-			char edit=sc.next().toUpperCase().charAt(0);
+		System.out.println("Do to need to edit the exiting user details Y / N? ");
+		char edit=sc.next().toUpperCase().charAt(0);
 
-			if (edit=='Y') {
-				System.out.println(editDetails()); 
-			}else{
-				System.out.println("Done");
-			}
+		if (edit=='Y') {
+			System.out.println(editDetails()); 
+		}else{
+			System.out.println("Done");
+		}
 
-			for(int j=0; j<list.size(); j++)
-				System.out.println(list.get(j));
-			sc.close();
-		
+		System.out.print("Do you want to Delete That Contact ? (y/n)");
+		char delete=sc.next().toUpperCase().charAt(0); 
+		if (delete=='Y'){
+			System.out.println(deleteDetails());
+		}else{
+			System.out.println("Done");
+		}
+
+		for(int j=0; j<list.size(); j++)
+			System.out.println(list.get(j));
+
+		sc.close();
+
 	}
 }
 
