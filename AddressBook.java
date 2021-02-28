@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 interface iContactDetails{
@@ -11,6 +13,7 @@ interface iContactDetails{
 public class AddressBook implements iContactDetails{
 
 	static ArrayList<ContactDetails> list = new ArrayList<ContactDetails>();
+	static  Map<String,AddressBook> map = new HashMap<>();
 	static Scanner sc = new Scanner(System.in);
 
 	@Override 
@@ -76,7 +79,7 @@ public class AddressBook implements iContactDetails{
 
 	public static String deleteDetails() {
 
-		System.out.println("Enter First Name of Details to be deteted: ");
+		System.out.println("Enter First Name of Details to be deleted: ");
 		String name2 = sc.next();
 
 		if (name2.equals(list.get(0).getFirstName())) {
@@ -87,13 +90,25 @@ public class AddressBook implements iContactDetails{
 		} 
 	}
 
+	public String  mulipleAddressBook()
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter name of new address book");
+		String name = sc.nextLine() ;
+		AddressBook addressBook  = new AddressBook();
+		map.put(name, addressBook);
+		System.out.println("new address book added "+ name); 
+		return name;
+	}
+
 	public static void main(String[] args){
 
 		AddressBook person=new AddressBook();
 		System.out.println("Welcome To Address Book Problem");
 		Scanner sc=new Scanner(System.in); 
+		String name1=person.mulipleAddressBook();
 
-		System.out.println("Number no of list of person to be added in AddressBook");
+		System.out.println("Number no of list of person to be added in AddressBook "+ name1);
 		int numOfPerson=sc.nextInt();
 
 		for (int i = 1; i <= numOfPerson; i++) { 
@@ -118,6 +133,7 @@ public class AddressBook implements iContactDetails{
 		}else{
 			System.out.println("Done");
 		}
+
 
 		for(int j=0; j<list.size(); j++)
 			System.out.println(list.get(j));
