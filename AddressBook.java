@@ -1,3 +1,4 @@
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,29 +20,50 @@ public  class AddressBook implements iContactDetails{
 	static ArrayList<ContactDetails> list = new ArrayList<ContactDetails>();
 	static Map<String,AddressBook> map = new HashMap<>();
 	static Scanner sc = new Scanner(System.in);
+	public static String firstName;
+	public static String lastName;
+
+
+	public boolean checkDuplicateName()
+	{
+
+		System.out.println("Enter FirstName");
+		firstName=sc.next();
+		System.out.println("Enter LastName");
+		lastName=sc.next();
+
+		for(int i=0;i<list.size();i++)
+		{
+			if(firstName.equals(list.get(i).getFirstName()) && lastName.equals(list.get(i).getLastName())) 
+				System.out.println("your name is already in list, Please press option 2 to edit the list");
+			selectInput();
+			return true;
+		}
+		return false;
+	}
 
 	@Override 
 	public  void addDetails()
 	{
 
-		System.out.println("Enter FirstName");
-		String firstName=sc.next();
-		System.out.println("Enter LastName");
-		String lastName=sc.next();
-		System.out.println("Enter Area");
-		String area=sc.next(); 
-		System.out.println("Enter CityName");
-		String city=sc.next();
-		System.out.println("Enter StateName");
-		String state=sc.next();
-		System.out.println("Enter ZipCode");
-		int zip=sc.nextInt();
-		System.out.println("Enter PhoneNumber");
-		int phoneNumber=sc.nextInt();
-		System.out.println("Enter Email");
-		String email=sc.next();
-		Address address1=new Address(area,city,state,zip);
-		list.add( new ContactDetails(firstName, lastName, address1, phoneNumber, email));
+		if(!checkDuplicateName())
+		{
+
+			System.out.println("Enter Area");
+			String area=sc.next(); 
+			System.out.println("Enter CityName");
+			String city=sc.next();
+			System.out.println("Enter StateName");
+			String state=sc.next();
+			System.out.println("Enter ZipCode");
+			int zip=sc.nextInt();
+			System.out.println("Enter PhoneNumber");
+			int phoneNumber=sc.nextInt();
+			System.out.println("Enter Email");
+			String email=sc.next();
+			Address address1=new Address(area,city,state,zip);
+			list.add( new ContactDetails(firstName, lastName, address1, phoneNumber, email));
+		}
 		System.out.println(list);
 	} 
 
@@ -64,7 +86,7 @@ public  class AddressBook implements iContactDetails{
 				System.out.println("Enter LastName"); 
 				list.get(i).setLastName(sc.next());
 				System.out.println("Enter Area");
-				address2.setArea(sc.next());
+				address2.setArea(sc.next()); 
 				System.out.println("Enter City");
 				address2.setCity(sc.next());
 				System.out.println("Enter State");
@@ -129,7 +151,7 @@ public  class AddressBook implements iContactDetails{
 
 		switch(choice){
 		case 0:
-			create_mulipleAddressBook();
+			create_mulipleAddressBook(); 
 			selectInput();
 			break;
 		case 1:
@@ -149,6 +171,7 @@ public  class AddressBook implements iContactDetails{
 			break;
 		case 5:
 			System.out.println("Thankyou for Details");
+			break;
 		default:
 			System.out.println("Invalid input");
 			selectInput();
