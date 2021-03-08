@@ -1,4 +1,3 @@
-
 public class ContactDetails {
 
 	public String firstName;
@@ -16,7 +15,7 @@ public class ContactDetails {
 		this.address = address;
 		this.phoneNumber=phoneNumber;
 		this.email = email;
-	}
+	} 
 
 	public void setAddress(Address address) {
 		this.address = address;
@@ -33,6 +32,7 @@ public class ContactDetails {
 
 	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
+		
 	}
 
 	public void setEmail(String email) {
@@ -49,7 +49,7 @@ public class ContactDetails {
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastName; 
 	}
 
 	public int getPhoneNumber() {

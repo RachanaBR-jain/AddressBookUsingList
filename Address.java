@@ -1,4 +1,3 @@
-//Composition
 public class Address {
 	String area;
 	String city;
@@ -8,18 +7,18 @@ public class Address {
 	public Address(String area,String city, String state, int zip) {
 		this.area=area;
 		this.city = city;
-		this.state = state; 
+		this.state = state;  
 		this.zip = zip;
 	}
 	
 	public void setArea(String area) {
 		this.area = area;
-	}
+	} 
 
 	public void setCity(String city) {
 		this.city = city;
 	}
-
+ 
 
 	public void setState(String state) {
 		this.state = state;
@@ -33,7 +32,7 @@ public class Address {
 	public String getArea() {
 		return area;
 	}
-
+ 
 
 	public String getCity() {
 		return city;
