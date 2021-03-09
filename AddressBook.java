@@ -111,10 +111,11 @@ public  class AddressBook implements iContactDetails{
 		for(int i=0;i<=list.size();i++)
 		{
 			if (name.equals(list.get(i).getFirstName())) {
-				list.remove(i);
+				list.remove(0);
 				System.out.println("Deleted"); 
 			}else{
 				System.out.println("Name Not Available in List");
+				break;
 			} 
 		}
 
