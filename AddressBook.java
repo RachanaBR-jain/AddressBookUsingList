@@ -1,8 +1,8 @@
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 interface iContactDetails{
@@ -14,7 +14,6 @@ interface iContactDetails{
 
 }
 
-
 public  class AddressBook implements iContactDetails{ 
 
 	static ArrayList<ContactDetails> list = new ArrayList<ContactDetails>();
@@ -22,7 +21,6 @@ public  class AddressBook implements iContactDetails{
 	static Scanner sc = new Scanner(System.in);
 	public static String firstName;
 	public static String lastName;
-
 
 	public boolean checkDuplicateName()
 	{
@@ -133,6 +131,7 @@ public  class AddressBook implements iContactDetails{
 		System.out.println("new address book added -->"+addressbook_name);  
 	} 
 
+
 	public  void show_AddressBooks(){
 		System.out.println("Available address books are");
 		for(int j=0; j<map.size(); j++)
@@ -143,9 +142,25 @@ public  class AddressBook implements iContactDetails{
 		}
 	}
 
+
+	public static void search_personByState() {
+
+		System.out.println("Enter State Name");
+		String state = sc.next();
+		for( int i = 0; i <list.size(); i++)
+		{
+			if (list.get(i).getAddress().getState().equals(state))
+			{
+
+				System.out.println(list.get(i));
+			}
+		}
+	}
+
+
 	public void selectInput()
 	{
-		System.out.println("0-Add Address book \n1- Add contact \n2-Edit contact \n3-delete contact \n4- view all contacts. \n5-Exit");
+		System.out.println("0-Add Address book \n1- Add contact \n2-Edit contact \n3-delete contact \n4- view all contacts \n5-Search person by state \n6-Exit");
 		System.out.print("\nEnter choice: ");
 		int  choice=sc.nextInt();
 
@@ -157,19 +172,24 @@ public  class AddressBook implements iContactDetails{
 		case 1:
 			addDetails();
 			selectInput();
-			break;
+			break; 
 		case 2:
 			editDetails();
 			selectInput();
 			break;
 		case 3:
-			deleteDetails();
+			deleteDetails(); 
 			selectInput();
 			break;
-		case 4: 
+		case 4:  
 			show_AddressBooks();
+			selectInput();
 			break;
 		case 5:
+			search_personByState();
+			selectInput();
+			break;
+		case 6:
 			System.out.println("Thankyou for Details");
 			break;
 		default:
@@ -177,7 +197,8 @@ public  class AddressBook implements iContactDetails{
 			selectInput();
 		}
 
-	} 
+	}
+
 
 	public static void main(String[] args) {
 
@@ -186,7 +207,8 @@ public  class AddressBook implements iContactDetails{
 		person.selectInput();
 
 	}
-} 
+}
+
 
 
 
