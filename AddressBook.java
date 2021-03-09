@@ -33,24 +33,23 @@ public  class AddressBook implements iContactDetails{
 		for(int i=0;i<list.size();i++)
 		{
 			if(firstName.equals(list.get(i).getFirstName()) && lastName.equals(list.get(i).getLastName())) 
+			{
 				System.out.println("your name is already in list, Please press option 2 to edit the list");
-			selectInput();
-			return true;
+				return true;
+			}
 		}
 		return false;
 	}
 
-	@Override 
+	@Override  
 	public  void addDetails()
-	{
-
+	{ 
 		if(!checkDuplicateName())
 		{
-
 			System.out.println("Enter Area");
 			String area=sc.next(); 
 			System.out.println("Enter CityName");
-			String city=sc.next();
+			String city=sc.next(); 
 			System.out.println("Enter StateName");
 			String state=sc.next();
 			System.out.println("Enter ZipCode");
@@ -61,13 +60,13 @@ public  class AddressBook implements iContactDetails{
 			String email=sc.next();
 			Address address1=new Address(area,city,state,zip);
 			list.add( new ContactDetails(firstName, lastName, address1, phoneNumber, email));
+			System.out.println(list);
 		}
-		System.out.println(list);
 	} 
 
 	public void editDetails() {
 
-		String name1;
+		String name1; 
 		System.out.println("Enter First Name of Details to be Edited: ");
 		name1 = sc.next();
 		String state = null;
@@ -112,10 +111,11 @@ public  class AddressBook implements iContactDetails{
 		for(int i=0;i<=list.size();i++)
 		{
 			if (name.equals(list.get(i).getFirstName())) {
-				list.remove(i);
+				list.remove(0);
 				System.out.println("Deleted"); 
 			}else{
 				System.out.println("Name Not Available in List");
+				break;
 			} 
 		}
 
@@ -134,11 +134,12 @@ public  class AddressBook implements iContactDetails{
 
 	public  void show_AddressBooks(){
 		System.out.println("Available address books are");
-		for(int j=0; j<map.size(); j++)
+		for(int j=0; j<list.size(); j++)
 		{   
 			System.out.println("_____________________________________________");
 			System.out.println("list of person in AddressBook are");
 			System.out.println(list.get(j));
+			System.out.println("_____________________________________________");
 		}
 	}
 
