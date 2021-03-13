@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public  class AddressBook implements iContactDetails{ 
 
@@ -11,8 +8,8 @@ public  class AddressBook implements iContactDetails{
 	public static Map<String, String> dictionaryCity=new HashMap<>();
 	public static Map<String, String> dictionaryState=new HashMap<>();
 
-	public static Map<String, Integer> cityCount = new HashMap<>();
-	public static Map<String, Integer> stateCount = new HashMap<>();
+	public static Map<Integer,String> cityCount = new HashMap<>();
+	public static Map<Integer,String> stateCount = new HashMap<>();
 
 
 	static Scanner sc = new Scanner(System.in);
@@ -104,6 +101,9 @@ public  class AddressBook implements iContactDetails{
 
 	@Override
 	public void  deleteDetails() {
+
+		System.out.println("Enter First Name to be deleted from Details: ");
+		String name = sc.next();
 		for(int i=0;i<list.size();i++)
 		{
 			if (checkDuplicateName()) {
@@ -111,6 +111,7 @@ public  class AddressBook implements iContactDetails{
 				System.out.println("Deleted"); 
 			}else{
 				System.out.println("Name Not Available in List");
+
 			} 
 		}
 
@@ -144,14 +145,9 @@ public  class AddressBook implements iContactDetails{
 
 		System.out.println("Enter State Name you need to search");
 		String state = sc.next();
-		for( int i = 0; i <list.size(); i++)
-		{
-			if (list.get(i).getAddress().getState().equals(state))
-			{
-
-				System.out.println(list.get(i));
-			}
-		}
+		list.forEach(i -> list.stream()
+				.filter(address -> i.getAddress().getState().equals(state))
+				.forEach(System.out::println));
 	}
 
 	@Override
@@ -159,14 +155,9 @@ public  class AddressBook implements iContactDetails{
 
 		System.out.println("Enter City Name you need to serach");
 		String city = sc.next();
-		for( int i = 0; i <list.size(); i++)
-		{
-			if (list.get(i).getAddress().getCity().equals(city))
-			{
-
-				System.out.println(list.get(i));
-			}
-		}
+		list.forEach(i -> list.stream()
+				.filter(address -> i.getAddress().getCity().equals(city))
+				.forEach(System.out::println));
 	}
 
 	@Override
@@ -199,43 +190,28 @@ public  class AddressBook implements iContactDetails{
 	}
 
 	@Override
-	public void getCityCount() {
+	public void getCityCount() 
+	{		
+		int city_count=0;
 		for (ContactDetails address: list)
 		{
-			cityCount.put(address.getAddress().getCity(), 0);
+			city_count++;
+			cityCount.put(city_count,address.getAddress().getCity());
 		}
-
-		for (Map.Entry<String, Integer> countCity : cityCount.entrySet()) {
-			int count = 0;
-			for (ContactDetails address: list)
-			{
-				if(address.getAddress().getCity().equals(countCity.getKey())) {
-					count++;
-					cityCount.put(address.getAddress().getCity(), count);
-				}
-			}
-			System.out.println("City: " + countCity.getKey() + " Number of Person: " + countCity.getValue());
-		}
+		cityCount.entrySet().stream().count();
+		cityCount.entrySet().stream().forEach(city-> System.out.println("city_name " +city.getValue()+ " Number of person:"+ city.getKey()));
 	}
 
 	@Override
 	public  void getStateCount() {
+		int state_count=0;
 		for (ContactDetails address: list) {
-			stateCount.put(address.getAddress().getState(), 0);
+			state_count++;
+			stateCount.put(state_count,address.getAddress().getState());
 		}
-
-		for (Map.Entry<String, Integer> countState : stateCount.entrySet()) {
-			int count = 0;
-			for (ContactDetails address: list) {
-				if (address.getAddress().getState().equals(countState.getKey())) {
-					count++;
-					stateCount.put(address.getAddress().getState(), count);
-				}
-			}
-			System.out.println("State: " +  countState.getKey() + " Number of Person: " + countState.getValue());
-		}
+		stateCount.entrySet().stream().count();
+		stateCount.entrySet().stream().forEach(state-> System.out.println("city_name " +state.getValue()+ " Number of person:"+ state.getKey()));
 	}
-
 
 	public void selectInput()
 	{
@@ -306,10 +282,4 @@ public  class AddressBook implements iContactDetails{
 		}
 	}
 }
-
-
-
-
-
-
 
