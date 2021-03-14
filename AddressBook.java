@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.*;
 
 public  class AddressBook implements iContactDetails{ 
 
@@ -212,19 +213,46 @@ public  class AddressBook implements iContactDetails{
 		stateCount.entrySet().stream().count();
 		stateCount.entrySet().stream().forEach(state-> System.out.println("city_name " +state.getValue()+ " Number of person:"+ state.getKey()));
 	}
+	
+	public void sort_name() 
+	{
+		/*for(int i=0;i<=(list.size()-1);i++)
+		{
+			for (int j = 0; j <( list.size()-1); j++)
+			{
+				if (list.get(j).getFirstName().compareTo(list.get(j+1).getFirstName())>0)
+				{
+					String temp = list.get(j).firstName;
+					list.get(j).firstName= list.get(j+1).firstName;
+					list.get(j+1).firstName = temp;
+					System.out.println(list.get(j).getFirstName()+" "+list.get(j+1).getFirstName());
+				} 
+			}
+		} */
+		
+		Comparator<ContactDetails> compareByName = Comparator
+                								.comparing(ContactDetails::getFirstName)
+                								.thenComparing(ContactDetails::getLastName);
 
-	public void selectInput()
+		List<ContactDetails> sortedList = list.stream()
+											  .sorted(compareByName)
+											  .collect(Collectors.toList());
+		System.out.println(sortedList);
+	}
+	
+
+	public void selectInput() 
 	{
 		System.out.println("0-Add Address book \n1-Add contact \n2-Edit contact \n3-Delete contact "
 				+ "\n4-View all contacts \n5-Search person by state "
 				+ "\n6-Search person by city  \n7-View person based on city  \n8-View person based on State"
-				+ "\n9-count person based on city \n10-Count person based on state \n11-Exit");
+				+ "\n9-count person based on city \n10-Count person based on state \n11-Print sorted name \n12-Exit");
 
 		System.out.print("\nEnter choice: ");
 		int  choice=sc.nextInt();
 
 		switch(choice){
-		case 0:
+		case 0: 
 			create_mulipleAddressBook(); 
 			selectInput();
 			break;
@@ -273,9 +301,12 @@ public  class AddressBook implements iContactDetails{
 			break;	
 
 		case 11: 
+			sort_name();
+			selectInput();
+			break;
+		case 12:
 			System.out.println("Thankyou for Details");
-			break;	
-
+			break;
 		default:
 			System.out.println("Invalid input");
 			selectInput();

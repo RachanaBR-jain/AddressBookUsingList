@@ -62,7 +62,7 @@ public class ContactDetails {
 
 	@Override
 	public String toString() {
-		return " Person details \n FirstName=" + firstName +"\n lastName=" + lastName +"\n address=" + address + "\n phoneNumber="+ phoneNumber+"\n email="+ email;
+		return "\n Person details \n FirstName=" + firstName +"\n lastName=" + lastName +"\n address=" + address + "\n phoneNumber="+ phoneNumber+"\n email="+ email +"\n";
 	}
 
 
