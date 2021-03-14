@@ -2,25 +2,26 @@ public class ContactDetails {
 
 	public String firstName;
 	public String lastName; 
-	public Address address;
 	public int phoneNumber;
 	public String email;
+	String area;
+	String city;
+	String state;
+	int zip;
 
 
 
-	public ContactDetails(String firstName, String lastName, Address address,int phoneNumber ,String email) {
+	public ContactDetails(String firstName, String lastName, String area, String city,String state,int zip,int phoneNumber ,String email) {
 		super();
 		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.phoneNumber=phoneNumber;
+		this.lastName = lastName; 
+		this.area=area;
+		this.city=city;
+		this.state=state;
+		this.zip=zip;
+		this.phoneNumber=phoneNumber; 
 		this.email = email;
 	} 
-
-	public void setAddress(Address address) {
-		this.address = address;
-	} 
-
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -37,10 +38,6 @@ public class ContactDetails {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Address getAddress() {
-		return address;
 	}
 
 
@@ -60,13 +57,44 @@ public class ContactDetails {
 		return email;
 	}
 
-	@Override
-	public String toString() {
-		return "\n Person details \n FirstName=" + firstName +"\n lastName=" + lastName +"\n address=" + address + "\n phoneNumber="+ phoneNumber+"\n email="+ email +"\n";
+	public String getArea() {
+		return area;
 	}
 
+	public void setArea(String area) {
+		this.area = area;
+	}
 
+	public String getCity() {
+		return city;
+	}
 
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state; 
+	}
+
+	public int getZip() {
+		return zip;
+	}
+
+	public void setZip(int zip) {
+		this.zip = zip;
+	}
+
+	@Override
+	public String toString() {
+		return "ContactDetails--> \n firstName=" + firstName + "\n lastName=" + lastName + "\n phoneNumber=" + phoneNumber
+				+ "\n email=" + email + "\n area=" + area + "\n city=" + city + "\n state=" + state + "\n zip=" + zip + "\n";
+		
+	}
 }
 
 

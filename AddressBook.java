@@ -53,8 +53,7 @@ public  class AddressBook implements iContactDetails{
 			int phoneNumber=sc.nextInt();
 			System.out.println("Enter Email");
 			String email=sc.next();
-			Address address1=new Address(area,city,state,zip);
-			list.add( new ContactDetails(firstName, lastName, address1, phoneNumber, email));
+			list.add( new ContactDetails(firstName, lastName, area,city,state,zip, phoneNumber, email));
 			System.out.println(list);
 		} 
 	} 
@@ -147,7 +146,7 @@ public  class AddressBook implements iContactDetails{
 		System.out.println("Enter State Name you need to search");
 		String state = sc.next();
 		list.forEach(i -> list.stream()
-				.filter(address -> i.getAddress().getState().equals(state))
+				.filter(address -> i.getState().equals(state))
 				.forEach(System.out::println));
 	}
 
@@ -157,7 +156,7 @@ public  class AddressBook implements iContactDetails{
 		System.out.println("Enter City Name you need to serach");
 		String city = sc.next();
 		list.forEach(i -> list.stream()
-				.filter(address -> i.getAddress().getCity().equals(city))
+				.filter(address -> i.getCity().equals(city))
 				.forEach(System.out::println));
 	}
 
@@ -166,7 +165,7 @@ public  class AddressBook implements iContactDetails{
 		for (ContactDetails address: list)
 		{
 			String name = address.getFirstName() + " " + address.getLastName();
-			dictionaryCity.put(name, address.getAddress().getCity());
+			dictionaryCity.put(name, address.getCity());
 		}
 
 		System.out.println("Enter City");
@@ -180,7 +179,7 @@ public  class AddressBook implements iContactDetails{
 		for (ContactDetails address1: list)
 		{
 			String name = address1.getFirstName()  + " " + address1.getLastName();
-			dictionaryCity.put(name, address1.getAddress().getState());
+			dictionaryCity.put(name, address1.getState());
 		}
 
 		System.out.println("Enter State");
@@ -197,7 +196,7 @@ public  class AddressBook implements iContactDetails{
 		for (ContactDetails address: list)
 		{
 			city_count++;
-			cityCount.put(city_count,address.getAddress().getCity());
+			cityCount.put(city_count,address.getCity());
 		}
 		cityCount.entrySet().stream().count();
 		cityCount.entrySet().stream().forEach(city-> System.out.println("city_name " +city.getValue()+ " Number of person:"+ city.getKey()));
@@ -208,13 +207,13 @@ public  class AddressBook implements iContactDetails{
 		int state_count=0;
 		for (ContactDetails address: list) {
 			state_count++;
-			stateCount.put(state_count,address.getAddress().getState());
+			stateCount.put(state_count,address.getState());
 		}
 		stateCount.entrySet().stream().count();
 		stateCount.entrySet().stream().forEach(state-> System.out.println("city_name " +state.getValue()+ " Number of person:"+ state.getKey()));
 	}
-	
-	public void sort_name() 
+
+	public void sort_name()  
 	{
 		/*for(int i=0;i<=(list.size()-1);i++)
 		{
@@ -229,24 +228,74 @@ public  class AddressBook implements iContactDetails{
 				} 
 			}
 		} */
-		
+
 		Comparator<ContactDetails> compareByName = Comparator
-                								.comparing(ContactDetails::getFirstName)
-                								.thenComparing(ContactDetails::getLastName);
+				.comparing(ContactDetails::getFirstName)
+				.thenComparing(ContactDetails::getLastName);
 
 		List<ContactDetails> sortedList = list.stream()
-											  .sorted(compareByName)
-											  .collect(Collectors.toList());
+				.sorted(compareByName)
+				.collect(Collectors.toList());
 		System.out.println(sortedList);
 	}
-	
+	public void sort_ByCity() 
+	{
+		Comparator<ContactDetails> compareByCity = Comparator
+				.comparing(ContactDetails::getCity);
+
+		List<ContactDetails> sortedListByArea = list.stream()
+				.sorted(compareByCity)
+				.collect(Collectors.toList());
+		System.out.println(sortedListByArea);
+	}
+
+	public void sort_ByState() 
+	{
+		Comparator<ContactDetails> compareByState = Comparator
+				.comparing(ContactDetails::getState);
+
+		List<ContactDetails> sortedListByState = list.stream()
+				.sorted(compareByState)
+				.collect(Collectors.toList());
+		System.out.println(sortedListByState);
+	}
+
+	public void sort_ByZip() 
+	{
+		Comparator<ContactDetails> compareByZip = Comparator
+				.comparing(ContactDetails::getZip);
+
+		List<ContactDetails> sortedListByZip = list.stream()
+				.sorted(compareByZip)
+				.collect(Collectors.toList());
+		System.out.println(sortedListByZip);
+	}
+
+	public void sort()
+	{
+		System.out.println("Sort List based on \n1--->name \n2--->City \n3--->State \n4--->Zip ");
+		System.out.print("\nEnter choice to sort : ");
+		int  choice=sc.nextInt();
+		switch(choice){
+		case 1: sort_name();
+		break;
+		case 2: sort_ByCity();
+		break;
+		case 3: sort_ByState();
+		break;
+		case 4: sort_ByZip(); 
+		break;
+		default: System.out.println("Invalid choice");
+		}
+	}
+
 
 	public void selectInput() 
 	{
 		System.out.println("0-Add Address book \n1-Add contact \n2-Edit contact \n3-Delete contact "
 				+ "\n4-View all contacts \n5-Search person by state "
 				+ "\n6-Search person by city  \n7-View person based on city  \n8-View person based on State"
-				+ "\n9-count person based on city \n10-Count person based on state \n11-Print sorted name \n12-Exit");
+				+ "\n9-count person based on city \n10-Count person based on state \n11-sortBasedOb->city/state/zip based on name, \n12-Exit");
 
 		System.out.print("\nEnter choice: ");
 		int  choice=sc.nextInt();
@@ -257,7 +306,7 @@ public  class AddressBook implements iContactDetails{
 			selectInput();
 			break;
 		case 1:
-			addDetails();
+			addDetails(); 
 			selectInput();
 			break; 
 		case 2:
@@ -301,7 +350,7 @@ public  class AddressBook implements iContactDetails{
 			break;	
 
 		case 11: 
-			sort_name();
+			sort();
 			selectInput();
 			break;
 		case 12:
